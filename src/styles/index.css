@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile hardening: terminal/mono layouts (long tech-tag strings, code-style
+   lines) are prone to horizontal overflow on narrow phones. Belt-and-braces
+   guard so a single long unbroken token can never push the viewport wide. */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  @apply bg-base text-ink font-body antialiased transition-colors duration-300;
+}
+
+html.light body {
+  @apply bg-light text-[#1B2233];
+}
+
+::selection {
+  background: #ffd43b;
+  color: #0a0e17;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #232c43;
+  border-radius: 999px;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #dde2ee;
+}
+
+:focus-visible {
+  outline: 2px solid #ffd43b;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.glass {
+  @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.08];
+}
+
+html.light .glass {
+  @apply bg-white/70 backdrop-blur-xl border border-black/[0.06];
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #4b8bbe, #ffd43b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section {
+  @apply relative mx-auto w-full max-w-6xl px-6 py-24 md:px-10 md:py-32;
+}
+
+.eyebrow {
+  @apply font-mono text-xs uppercase tracking-[0.25em] text-py-yellow;
+}
+
+.section-title {
+  @apply font-display text-3xl font-semibold tracking-tight text-ink md:text-4xl;
+}
+
+html.light .section-title {
+  @apply text-[#141A29];
+}
+
+/* Terminal caret used across the hero + labels */
+.caret {
+  display: inline-block;
+  width: 0.55ch;
+  background: #ffd43b;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+/* Node/graph ambient background */
+.node-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+}
